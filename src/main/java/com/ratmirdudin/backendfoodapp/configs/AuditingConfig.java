@@ -1,8 +1,8 @@
 package com.ratmirdudin.backendfoodapp.configs;
 
 import com.ratmirdudin.backendfoodapp.exceptions.ResourceNotFoundException;
-import com.ratmirdudin.backendfoodapp.models.User;
-import com.ratmirdudin.backendfoodapp.repositories.UserRepository;
+import com.ratmirdudin.backendfoodapp.user.repository.domain.UserEntity;
+import com.ratmirdudin.backendfoodapp.user.repository.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -51,9 +51,9 @@ class SpringSecurityAuditAwareImpl implements AuditorAware<Long> {
 
         String username = authentication.getName();
 
-        User user = userRepository.findByUsername(username).orElseThrow(
+        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(
                 () -> new ResourceNotFoundException("User with username: " + username + " not found"));
 
-        return Optional.ofNullable(user.getId());
+        return Optional.ofNullable(userEntity.getId());
     }
 }

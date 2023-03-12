@@ -1,7 +1,7 @@
 package com.ratmirdudin.backendfoodapp.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ratmirdudin.backendfoodapp.models.User;
+import com.ratmirdudin.backendfoodapp.user.repository.domain.UserEntity;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,8 +40,8 @@ public class UserPrincipal implements UserDetails {
         this.enabled = enabled;
     }
 
-    public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = user.getRoles()
+    public static UserPrincipal create(UserEntity userEntity) {
+        List<GrantedAuthority> authorities = userEntity.getRoleEntities()
                 .stream()
                 .map(
                         role -> new SimpleGrantedAuthority(role.getName().name())
@@ -49,11 +49,11 @@ public class UserPrincipal implements UserDetails {
                 .collect(Collectors.toList());
 
         return new UserPrincipal(
-                user.getId(),
-                user.getUsername(),
-                user.getPassword(),
+                userEntity.getId(),
+                userEntity.getUsername(),
+                userEntity.getPassword(),
                 authorities,
-                user.isEnabled());
+                userEntity.isEnabled());
     }
 
     @Override
