@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "t_weekly")
+@Table(name = "weekly")
 @Data
 @Builder
 @NoArgsConstructor

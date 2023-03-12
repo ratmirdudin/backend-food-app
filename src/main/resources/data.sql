@@ -1,5 +1,5 @@
 -- Add users and roles
-INSERT INTO T_ROLE(name)
+INSERT INTO ROLE(name)
 VALUES ('ROLE_USER'),
        ('ROLE_ADMIN');
 
@@ -11,14 +11,14 @@ VALUES ('Ratmir', 'Dudin', 'ratmirdudin', current_timestamp, current_timestamp, 
        ('Dima', 'Labanav', 'dimalabanav', current_timestamp, current_timestamp, TRUE,
         '$2a$12$zrmNOldZ9lKn8yr/EH63GOLaloLWdPfOEVGU0ZMTHxKU6OMyH.hZC');
 
-INSERT INTO T_USER_ROLE(user_id, role_id)
+INSERT INTO USER_ROLE(user_id, role_id)
 VALUES (1, 1),
        (1, 2),
        (2, 1),
        (3, 1);
 
 -- Add foods and tags
-INSERT INTO T_TAG(name)
+INSERT INTO TAG(name)
 VALUES ('Asian kitchen'),
        ('Korean kitchen'),
        ('Japan kitchen'),
@@ -26,7 +26,7 @@ VALUES ('Asian kitchen'),
        ('Russian kitchen'),
        ('Caucasian kitchen');
 
-INSERT INTO T_FOOD(name, description, created_at, updated_at)
+INSERT INTO FOOD(name, description, created_at, updated_at)
 VALUES ('Гречка с курицей', 'Описание блюда', current_timestamp, current_timestamp),
        ('Салат цезарь с курицей и сухариками', 'Описание блюда', current_timestamp, current_timestamp),
        ('Торт "Черепаха', 'Описание блюда', current_timestamp, current_timestamp),
@@ -46,7 +46,7 @@ VALUES ('Гречка с курицей', 'Описание блюда', current_timestamp, current_timesta
        ('Котлеты "Гнезда"', 'Описание блюда', current_timestamp, current_timestamp),
        ('Запеканка из картофеля и мясного фарша', 'Описание блюда', current_timestamp, current_timestamp);
 
-INSERT INTO T_FOOD_TAG(food_id, tag_id)
+INSERT INTO FOOD_TAG(food_id, tag_id)
 VALUES (1, 1),
        (2, 3),
 --        (2, 6),

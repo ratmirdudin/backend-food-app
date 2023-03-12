@@ -1,6 +1,6 @@
 package com.ratmirdudin.backendfoodapp.user.mappers;
 
-import com.ratmirdudin.backendfoodapp.user.models.UserDto;
+import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationResponse;
 import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationDto;
 import com.ratmirdudin.backendfoodapp.user.repository.domain.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class UserMapper {
     private final ModelMapper mapper;
 
-    public UserEntity toEntity(UserDto dto) {
+    public UserEntity toEntity(UserRegistrationResponse dto) {
         return Objects.isNull(dto) ? null : mapper.map(dto, UserEntity.class);
     }
 
@@ -22,7 +22,7 @@ public class UserMapper {
         return Objects.isNull(dto) ? null : mapper.map(dto, UserEntity.class);
     }
 
-    public UserDto toDto(UserEntity entity) {
-        return Objects.isNull(entity) ? null : mapper.map(entity, UserDto.class);
+    public UserRegistrationResponse toRegistered(UserEntity entity) {
+        return Objects.isNull(entity) ? null : mapper.map(entity, UserRegistrationResponse.class);
     }
 }

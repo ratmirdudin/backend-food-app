@@ -1,6 +1,6 @@
 package com.ratmirdudin.backendfoodapp.user.models;
 
-import com.ratmirdudin.backendfoodapp.user.repository.domain.RoleEntity;
+import com.ratmirdudin.backendfoodapp.user.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +13,10 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserRegistrationResponse {
     private Long id;
     private String firstname;
     private String lastname;
     private String username;
-    private Collection<RoleEntity> roleEntities = new ArrayList<>();
+    private Collection<RoleEnum> roles = new ArrayList<>();
 }

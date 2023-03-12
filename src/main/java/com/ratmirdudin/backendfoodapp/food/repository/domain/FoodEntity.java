@@ -17,7 +17,7 @@ import java.util.List;
         }
 )
 @Entity
-@Table(name = "t_food")
+@Table(name = "food")
 @Data
 @Builder
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class FoodEntity extends DateAudit {
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "t_food_tag",
+    @JoinTable(name = "food_tag",
             joinColumns = @JoinColumn(name = "food_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )

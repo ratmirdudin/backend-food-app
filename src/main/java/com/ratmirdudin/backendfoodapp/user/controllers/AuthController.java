@@ -1,6 +1,6 @@
 package com.ratmirdudin.backendfoodapp.user.controllers;
 
-import com.ratmirdudin.backendfoodapp.user.models.UserDto;
+import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationResponse;
 import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationDto;
 import com.ratmirdudin.backendfoodapp.user.services.AuthService;
 import com.ratmirdudin.backendfoodapp.user.services.UserService;
@@ -21,8 +21,8 @@ public class AuthController {
     // @PostMapping(/login) realized via class JwtUsernamePasswordAuthenticationFilter
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
-        UserDto saveUser = userService.saveUser(userRegistrationDto);
+    public ResponseEntity<UserRegistrationResponse> registerUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+        UserRegistrationResponse saveUser = userService.saveUser(userRegistrationDto);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/" + saveUser.getUsername()).toUriString());
         return ResponseEntity.created(uri).body(saveUser);
     }

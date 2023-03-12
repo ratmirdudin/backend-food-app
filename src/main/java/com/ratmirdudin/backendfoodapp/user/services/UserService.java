@@ -1,6 +1,6 @@
 package com.ratmirdudin.backendfoodapp.user.services;
 
-import com.ratmirdudin.backendfoodapp.user.models.UserDto;
+import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationResponse;
 import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationDto;
 import com.ratmirdudin.backendfoodapp.user.enums.RoleEnum;
 import com.ratmirdudin.backendfoodapp.exceptions.ResourceNotFoundException;
@@ -29,7 +29,7 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDto saveUser(UserRegistrationDto userRegistrationDto) {
+    public UserRegistrationResponse saveUser(UserRegistrationDto userRegistrationDto) {
         log.info("Saving new user with username: {}", userRegistrationDto.getUsername());
         UserEntity userEntity = userMapper.toEntity(userRegistrationDto);
         RoleEntity roleEntity = roleRepository.findByName(RoleEnum.ROLE_USER).orElseThrow(
@@ -37,27 +37,27 @@ public class UserService {
         userEntity.setRoles(Set.of(roleEntity));
         userEntity.setEnabled(true);
         userEntity.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-        return userMapper.toDto(userRepository.save(userEntity));
+        return userMapper.toRegistered(userRepository.save(userEntity));
     }
 
-    public UserDto getUserByUsername(String username) {
+    public UserRegistrationResponse getUserByUsername(String username) {
         log.info("Fetching user with username: {}", username);
         UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(
                 () -> new ResourceNotFoundException("User with username: " + username + " not found"));
-        return userMapper.toDto(userEntity);
+        return userMapper.toRegistered(userEntity);
     }
 
-    public List<UserDto> getAllUsers() {
+    public List<UserRegistrationResponse> getAllUsers() {
         log.info("Fetching all users");
         return userRepository.findAll().stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toRegistered)
                 .collect(Collectors.toList());
     }
 
-    public List<UserDto> getRandomUsers(Long limit) {
+    public List<UserRegistrationResponse> getRandomUsers(Long limit) {
         return userRepository.findAllOrderByRandom(limit)
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toRegistered)
                 .collect(Collectors.toList());
     }
 }

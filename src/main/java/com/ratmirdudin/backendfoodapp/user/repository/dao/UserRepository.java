@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByUsername(String username);
 
     @EntityGraph(value = "user-entity-graph")
-    @Query(value = "select * from t_users order by random() limit :limit", nativeQuery = true)
+    @Query(value = "select * from users order by random() limit :limit", nativeQuery = true)
     List<UserEntity> findAllOrderByRandom(@Param("limit") Long limit);
 }

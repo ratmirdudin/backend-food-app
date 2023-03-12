@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "t_favourite_food")
+@Table(name = "favourite_food")
 @Data
 @Builder
 @NoArgsConstructor

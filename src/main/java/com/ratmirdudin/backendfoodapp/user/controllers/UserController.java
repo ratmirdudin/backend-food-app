@@ -1,6 +1,6 @@
 package com.ratmirdudin.backendfoodapp.user.controllers;
 
-import com.ratmirdudin.backendfoodapp.user.models.UserDto;
+import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationResponse;
 import com.ratmirdudin.backendfoodapp.user.models.UserRegistrationDto;
 import com.ratmirdudin.backendfoodapp.user.services.AuthService;
 import com.ratmirdudin.backendfoodapp.user.services.UserService;
@@ -23,30 +23,30 @@ public class UserController {
 
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<List<UserRegistrationResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+    public ResponseEntity<UserRegistrationResponse> getUserByUsername(@PathVariable String username) {
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserDto> getCurrentUser() {
+    public ResponseEntity<UserRegistrationResponse> getCurrentUser() {
         String currentUsername = authService.getCurrentUsername();
         return ResponseEntity.ok(userService.getUserByUsername(currentUsername));
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserRegistrationDto userRegistrationDto) {
-        UserDto saveUser = userService.saveUser(userRegistrationDto);
+    public ResponseEntity<UserRegistrationResponse> saveUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+        UserRegistrationResponse saveUser = userService.saveUser(userRegistrationDto);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/" + saveUser.getUsername()).toUriString());
         return ResponseEntity.created(uri).body(saveUser);
     }
 
     @GetMapping("/getRandom")
-    public ResponseEntity<List<UserDto>> getRandomUsers(@RequestParam(defaultValue = "1") Long limit) {
+    public ResponseEntity<List<UserRegistrationResponse>> getRandomUsers(@RequestParam(defaultValue = "1") Long limit) {
         return ResponseEntity.ok(userService.getRandomUsers(limit));
     }
 }
