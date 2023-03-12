@@ -22,9 +22,9 @@ public class FavouriteFoodEntity extends DateAudit {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "food_id")
-    private FoodEntity foodEntity;
+    private FoodEntity food;
 }

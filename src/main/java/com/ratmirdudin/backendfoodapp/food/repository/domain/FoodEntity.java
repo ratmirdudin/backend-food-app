@@ -13,7 +13,7 @@ import java.util.List;
 @NamedEntityGraph(
         name = "food-entity-graph",
         attributeNodes = {
-                @NamedAttributeNode("tagEntities"),
+                @NamedAttributeNode("tags"),
         }
 )
 @Entity
@@ -39,5 +39,5 @@ public class FoodEntity extends DateAudit {
             joinColumns = @JoinColumn(name = "food_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
-    private List<TagEntity> tagEntities = new ArrayList<>();
+    private List<TagEntity> tags = new ArrayList<>();
 }

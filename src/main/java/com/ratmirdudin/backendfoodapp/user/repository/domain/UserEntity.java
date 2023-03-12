@@ -15,7 +15,7 @@ import java.util.Collection;
 @NamedEntityGraph(
         name = "user-entity-graph",
         attributeNodes = {
-                @NamedAttributeNode("roleEntities"),
+                @NamedAttributeNode("roles"),
         }
 )
 @Entity
@@ -49,5 +49,5 @@ public class UserEntity extends DateAudit {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Collection<RoleEntity> roleEntities = new ArrayList<>();
+    private Collection<RoleEntity> roles = new ArrayList<>();
 }

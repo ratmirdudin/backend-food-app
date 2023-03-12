@@ -34,7 +34,7 @@ public class AuthService {
         UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(
                 () -> new ResourceNotFoundException("User with username: " + username + " not found"));
 
-        List<String> authorities = userEntity.getRoleEntities()
+        List<String> authorities = userEntity.getRoles()
                 .stream()
                 .map(role -> role.getName().name())
                 .collect(Collectors.toList());

@@ -34,7 +34,7 @@ public class UserService {
         UserEntity userEntity = userMapper.toEntity(userRegistrationDto);
         RoleEntity roleEntity = roleRepository.findByName(RoleEnum.ROLE_USER).orElseThrow(
                 () -> new ResourceNotFoundException("Role with name: " + RoleEnum.ROLE_USER + " not found"));
-        userEntity.setRoleEntities(Set.of(roleEntity));
+        userEntity.setRoles(Set.of(roleEntity));
         userEntity.setEnabled(true);
         userEntity.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         return userMapper.toDto(userRepository.save(userEntity));

@@ -41,7 +41,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(UserEntity userEntity) {
-        List<GrantedAuthority> authorities = userEntity.getRoleEntities()
+        List<GrantedAuthority> authorities = userEntity.getRoles()
                 .stream()
                 .map(
                         role -> new SimpleGrantedAuthority(role.getName().name())
